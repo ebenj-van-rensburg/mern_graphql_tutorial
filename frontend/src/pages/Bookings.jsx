@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import Spinner from '../components/Spinner/Spinner';
 import { AuthContext } from '../context/auth-context';
 import BookingList from '../components/Bookings/BookingList/BookingList';
-import BookingsChart from '../components/Bookings/BookingsChart/BookingsChart';
-import BookingsControls from '../components/Bookings/BookingsControls/BookingsControls';
 
 const BookingsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -109,20 +107,11 @@ const BookingsPage = () => {
   if (!isLoading) {
     content = (
       <>
-        <BookingsControls
-          activeOutputType={outputType}
-          onChange={changeOutputTypeHandler}
+      <div className="events-control">Your Bookings</div>
+        <BookingList
+          bookings={bookings}
+          onDelete={deleteBookingHandler}
         />
-        <div>
-          {outputType === 'list' ? (
-            <BookingList
-              bookings={bookings}
-              onDelete={deleteBookingHandler}
-            />
-          ) : (
-            <BookingsChart bookings={bookings} />
-          )}
-        </div>
       </>
     );
   }
